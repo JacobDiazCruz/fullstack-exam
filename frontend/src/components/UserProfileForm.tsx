@@ -1,12 +1,14 @@
 import { Modal } from "@mui/base";
 import CloseIcon from "@mui/icons-material/Close";
 import { Box, Button, IconButton, TextField, Typography } from "@mui/material";
-import React, { useState } from "react";
+import React from "react";
 import { IUserProfile } from "../../../backend";
 import { createProfile } from "../api/profile";
 interface Props {
   fetchProfiles: () => void;
   open: boolean;
+  profile: IUserProfile;
+  setProfile: any;
   onClose: () => void;
 }
 
@@ -17,23 +19,17 @@ const style = {
   transform: "translate(-50%, -50%)",
   width: 400,
   bgcolor: "background.paper",
-  border: "2px solid #000",
   boxShadow: 24,
   p: 4,
 };
 
 export const UserProfileForm: React.FC<Props> = ({
+  profile,
+  setProfile,
   fetchProfiles,
   open,
   onClose,
 }) => {
-  const [profile, setProfile] = useState<IUserProfile>({
-    name: "",
-    email: "",
-    age: 0,
-    tags: [],
-  });
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setProfile({ ...profile, [e.target.name]: e.target.value });
   };

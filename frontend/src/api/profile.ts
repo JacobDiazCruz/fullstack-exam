@@ -8,6 +8,13 @@ export const getAllProfiles = async (): Promise<IUserProfile[]> => {
   return response.data;
 };
 
+export const getProfileById = async (
+  profileId: string
+): Promise<IUserProfile> => {
+  const response = await axios.get(`${API_URL}/${profileId}`);
+  return response.data;
+};
+
 export const createProfile = async (
   profile: IUserProfile
 ): Promise<IUserProfile> => {

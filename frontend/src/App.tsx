@@ -10,6 +10,12 @@ import { UserProfileList } from "./components/UserProfileList";
 const App: React.FC = () => {
   const [profiles, setProfiles] = useState<IUserProfile[]>([]);
   const [showProfileForm, setShowProfileForm] = useState(false);
+  const [profile, setProfile] = useState<IUserProfile>({
+    name: "",
+    email: "",
+    age: 0,
+    tags: [],
+  });
 
   useEffect(() => {
     fetchProfiles();
@@ -34,11 +40,20 @@ const App: React.FC = () => {
           Add new Profile
         </Button>
         <UserProfileForm
+          profile={profile}
+          setProfile={setProfile}
           fetchProfiles={fetchProfiles}
           open={showProfileForm}
           onClose={() => setShowProfileForm(false)}
         />
-        <UserProfileList profiles={profiles} fetchProfiles={fetchProfiles} />
+        <UserProfileList
+          profiles={profiles}
+          fetchProfiles={fetchProfiles}
+          handleShowForm={(profile: IUserProfile) => {
+            setProfile(profile);
+            setShowProfileForm(true);
+          }}
+        />
         <DataTable />
       </div>
     </div>
