@@ -37,11 +37,7 @@ const router = express.Router();
 const connectDB = async () => {
   try {
     // mongodb+srv://carljacobdiazcruz:DkRtY1PdFGrwLgz1@roadmapcluster.xp1n24r.mongodb.net/
-    await mongoose.connect("mongodb://localhost:27017/userProfileDB", {
-      //@ts-ignore
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
+    await mongoose.connect("mongodb+srv://carljacobdiazcruz:DkRtY1PdFGrwLgz1@roadmapcluster.xp1n24r.mongodb.net/", {});
     console.log("MongoDB Connected...");
   } catch (error) {
     console.error("MongoDB connection error:", error);
@@ -49,16 +45,16 @@ const connectDB = async () => {
   }
 };
 
-const getAllProfiles = async (req?: Request, res?: Response) => {
+const getAllProfiles = async (req: Request, res: Response) => {
   const profiles = await UserProfile.find();
   res.json(profiles);
   return profiles;
 };
 
-const getProfileById = async (req: Request, res?: Response) => {
-  const allProfiles = await getAllProfiles();
-  if (allProfiles.some((profile) => profile._id === req.params.id)) {
-    return allProfiles.some((profile) => profile._id === req.params.id);
+const getProfileById = async (req: Request, res: Response) => {
+  const allProfiles = await getAllProfiles(req, res);
+  if (allProfiles.some((profile: any) => profile._id === req.params.id)) {
+    return allProfiles.some((profile: any) => profile._id === req.params.id);
   }
 };
 
@@ -80,7 +76,7 @@ const updateProfile = async (req: Request, res: Response) => {
 };
 
 const deleteProfile = async (req: Request, res: Response) => {
-  const profile: any = await getProfileById(req);
+  const profile: any = await getProfileById(req, res);
   await profile.deleteOne();
   res.json({ msg: "Profile removed" });
   return profile;
