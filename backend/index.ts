@@ -36,7 +36,9 @@ const router = express.Router();
 
 const connectDB = async () => {
   try {
+    // mongodb+srv://carljacobdiazcruz:DkRtY1PdFGrwLgz1@roadmapcluster.xp1n24r.mongodb.net/
     await mongoose.connect("mongodb://localhost:27017/userProfileDB", {
+      //@ts-ignore
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
