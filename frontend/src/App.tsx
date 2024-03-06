@@ -1,3 +1,5 @@
+import AddIcon from "@mui/icons-material/Add";
+import { Button } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { IUserProfile } from "../../backend";
 import { getAllProfiles } from "./api/profile";
@@ -7,6 +9,7 @@ import { UserProfileList } from "./components/UserProfileList";
 
 const App: React.FC = () => {
   const [profiles, setProfiles] = useState<IUserProfile[]>([]);
+  const [showProfileForm, setShowProfileForm] = useState(false);
 
   useEffect(() => {
     fetchProfiles();
@@ -19,10 +22,25 @@ const App: React.FC = () => {
 
   return (
     <div>
-      <h1>User Profile Management</h1>
-      <UserProfileForm fetchProfiles={fetchProfiles} />
-      <UserProfileList profiles={profiles} fetchProfiles={fetchProfiles} />
-      <DataTable />
+      <div
+        style={{ margin: "auto", justifyContent: "center", width: "1200px" }}
+      >
+        <h1>User Profile Management</h1>
+        <Button
+          onClick={() => setShowProfileForm(true)}
+          startIcon={<AddIcon />}
+          variant="contained"
+        >
+          Add new Profile
+        </Button>
+        <UserProfileForm
+          fetchProfiles={fetchProfiles}
+          open={showProfileForm}
+          onClose={() => setShowProfileForm(false)}
+        />
+        <UserProfileList profiles={profiles} fetchProfiles={fetchProfiles} />
+        <DataTable />
+      </div>
     </div>
   );
 };

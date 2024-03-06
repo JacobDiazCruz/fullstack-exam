@@ -26,7 +26,7 @@ export const UserProfileList: React.FC<Props> = ({
             <button
               onClick={async () => {
                 await deleteProfile(profile._id as string);
-                await fetchProfiles();
+                fetchProfiles();
               }}
             >
               Delete
