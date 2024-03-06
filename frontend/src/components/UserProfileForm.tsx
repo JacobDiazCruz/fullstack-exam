@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { IUserProfile } from "../../../backend";
 import { createProfile } from "../api/profile";
 

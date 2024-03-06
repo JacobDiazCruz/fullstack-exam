@@ -36,8 +36,10 @@ const router = express.Router();
 
 const connectDB = async () => {
   try {
-    // mongodb+srv://carljacobdiazcruz:DkRtY1PdFGrwLgz1@roadmapcluster.xp1n24r.mongodb.net/
-    await mongoose.connect("mongodb+srv://carljacobdiazcruz:DkRtY1PdFGrwLgz1@roadmapcluster.xp1n24r.mongodb.net/", {});
+    await mongoose.connect(
+      "mongodb+srv://carljacobdiazcruz:DkRtY1PdFGrwLgz1@roadmapcluster.xp1n24r.mongodb.net/",
+      {}
+    );
     console.log("MongoDB Connected...");
   } catch (error) {
     console.error("MongoDB connection error:", error);
@@ -53,9 +55,9 @@ const getAllProfiles = async (req: Request, res: Response) => {
 
 const getProfileById = async (req: Request, res: Response) => {
   const allProfiles = await getAllProfiles(req, res);
-  if (allProfiles.some((profile: any) => profile._id === req.params.id)) {
-    return allProfiles.some((profile: any) => profile._id === req.params.id);
-  }
+  return allProfiles.find(
+    (profile) => profile._id.toString() === req.params.id
+  );
 };
 
 const createProfile = async (req: Request, res: Response) => {

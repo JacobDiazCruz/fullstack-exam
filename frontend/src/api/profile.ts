@@ -14,3 +14,8 @@ export const createProfile = async (
   const response = await axios.post(API_URL, profile);
   return response.data;
 };
+
+export const deleteProfile = async (profileId: string) => {
+  const response = await axios.delete(`${API_URL}/${profileId}`);
+  return response.data;
+};
