@@ -80,7 +80,7 @@ const updateProfile = async (req: Request, res: Response) => {
 const deleteProfile = async (req: Request, res: Response) => {
   const profile: any = await getProfileById(req, res);
   await profile.deleteOne();
-  res.json({ msg: "Profile removed" });
+  // res.json({ msg: "Profile removed" });
   return profile;
 };
 

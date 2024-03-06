@@ -4,9 +4,13 @@ import { deleteProfile } from "../api/profile";
 
 interface Props {
   profiles: IUserProfile[];
+  fetchProfiles: () => void;
 }
 
-export const UserProfileList: React.FC<Props> = ({ profiles }) => {
+export const UserProfileList: React.FC<Props> = ({
+  profiles,
+  fetchProfiles,
+}) => {
   return (
     <div>
       <h2>Task 1: User Profiles</h2>
@@ -19,7 +23,12 @@ export const UserProfileList: React.FC<Props> = ({ profiles }) => {
               profile.tags.map((tag, index) => (
                 <span key={index}> {tag} </span>
               ))}
-            <button onClick={() => deleteProfile(profile._id as string)}>
+            <button
+              onClick={async () => {
+                await deleteProfile(profile._id as string);
+                await fetchProfiles();
+              }}
+            >
               Delete
             </button>
           </li>

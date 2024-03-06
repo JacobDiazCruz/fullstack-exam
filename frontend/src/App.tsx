@@ -21,7 +21,7 @@ const App: React.FC = () => {
     <div>
       <h1>User Profile Management</h1>
       <UserProfileForm fetchProfiles={fetchProfiles} />
-      <UserProfileList profiles={profiles} />
+      <UserProfileList profiles={profiles} fetchProfiles={fetchProfiles} />
       <DataTable />
     </div>
   );
