@@ -10,6 +10,7 @@ import { UserProfileList } from "./components/UserProfileList";
 const App: React.FC = () => {
   const [profiles, setProfiles] = useState<IUserProfile[]>([]);
   const [showProfileForm, setShowProfileForm] = useState(false);
+  const [formType, setFormType] = useState<"CREATE" | "UPDATE">("CREATE");
   const [profile, setProfile] = useState<IUserProfile>({
     name: "",
     email: "",
@@ -33,13 +34,17 @@ const App: React.FC = () => {
       >
         <h1>User Profile Management</h1>
         <Button
-          onClick={() => setShowProfileForm(true)}
+          onClick={() => {
+            setFormType("CREATE");
+            setShowProfileForm(true);
+          }}
           startIcon={<AddIcon />}
           variant="contained"
         >
           Add new Profile
         </Button>
         <UserProfileForm
+          type={formType}
           profile={profile}
           setProfile={setProfile}
           fetchProfiles={fetchProfiles}
@@ -50,6 +55,7 @@ const App: React.FC = () => {
           profiles={profiles}
           fetchProfiles={fetchProfiles}
           handleShowForm={(profile: IUserProfile) => {
+            setFormType("UPDATE");
             setProfile(profile);
             setShowProfileForm(true);
           }}

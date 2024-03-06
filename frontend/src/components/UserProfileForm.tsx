@@ -3,8 +3,9 @@ import CloseIcon from "@mui/icons-material/Close";
 import { Box, Button, IconButton, TextField, Typography } from "@mui/material";
 import React from "react";
 import { IUserProfile } from "../../../backend";
-import { createProfile } from "../api/profile";
+import { createProfile, updateProfile } from "../api/profile";
 interface Props {
+  type: "CREATE" | "UPDATE";
   fetchProfiles: () => void;
   open: boolean;
   profile: IUserProfile;
@@ -24,6 +25,7 @@ const style = {
 };
 
 export const UserProfileForm: React.FC<Props> = ({
+  type,
   profile,
   setProfile,
   fetchProfiles,
@@ -36,7 +38,9 @@ export const UserProfileForm: React.FC<Props> = ({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    await createProfile(profile);
+    type === "CREATE"
+      ? await createProfile(profile)
+      : await updateProfile(profile);
     setProfile({ name: "", email: "", age: 0, tags: [] });
     fetchProfiles();
     onClose();

@@ -22,6 +22,13 @@ export const createProfile = async (
   return response.data;
 };
 
+export const updateProfile = async (
+  profile: IUserProfile
+): Promise<IUserProfile> => {
+  const response = await axios.put(`${API_URL}/${profile._id}`, profile);
+  return response.data;
+};
+
 export const deleteProfile = async (profileId: string) => {
   const response = await axios.delete(`${API_URL}/${profileId}`);
   return response.data;
