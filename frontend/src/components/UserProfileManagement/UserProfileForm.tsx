@@ -58,7 +58,9 @@ export const UserProfileForm: React.FC<Props> = ({
     <Dialog open={open} onClose={onClose}>
       <DialogContent sx={{ width: 400 }}>
         <Box sx={{ display: "flex", justifyContent: "space-between", mb: 3 }}>
-          <Typography variant="h5">Profile Form</Typography>
+          <Typography variant="h6" fontWeight="600">
+            {type === "CREATE" ? "Create Profile" : "Edit Profile"}
+          </Typography>
           <IconButton onClick={onClose}>
             <CloseIcon />
           </IconButton>

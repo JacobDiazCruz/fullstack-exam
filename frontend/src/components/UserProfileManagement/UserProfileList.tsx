@@ -1,5 +1,6 @@
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
+import LoadingButton from "@mui/lab/LoadingButton";
 import {
   Box,
   Button,
@@ -28,6 +29,20 @@ export const UserProfileList: React.FC<Props> = ({
 }) => {
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
   const [selectedProfileId, setSelectedProfileId] = useState("");
+  const [deleteLoading, setDeleteLoading] = useState(false);
+
+  const handleDeleteProfile = async () => {
+    setDeleteLoading(true);
+    try {
+      await deleteProfile(selectedProfileId);
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setDeleteLoading(false);
+      setShowDeleteDialog(false);
+      fetchProfiles();
+    }
+  };
 
   return (
     <div>
@@ -106,22 +121,18 @@ export const UserProfileList: React.FC<Props> = ({
           >
             Cancel
           </Button>
-          <Button
+          <LoadingButton
             variant="contained"
+            loading={deleteLoading}
             sx={{
               background: "#ef4444",
               textTransform: "capitalize",
             }}
             disableElevation
-            onClick={async () => {
-              setShowDeleteDialog(false);
-              await deleteProfile(selectedProfileId);
-              fetchProfiles();
-            }}
-            autoFocus
+            onClick={handleDeleteProfile}
           >
             Delete
-          </Button>
+          </LoadingButton>
         </DialogActions>
       </Dialog>
     </div>
