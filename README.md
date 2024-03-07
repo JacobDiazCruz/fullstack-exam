@@ -1,4 +1,5 @@
 ## Exam Notes:
+Issues I've found and some changes that I've made.
 
 1. Initially, after creating a user profile, the updated profile wouldn't appear in the list. I fixed this by triggering the **`getAllProfiles`** action after successfully creating a new user profile.
 
