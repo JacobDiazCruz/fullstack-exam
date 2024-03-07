@@ -1,5 +1,6 @@
 import bodyParser from "body-parser";
 import cors from "cors";
+import { AnyARecord } from "dns";
 import express, { Request, Response } from "express";
 import mongoose, { Schema } from "mongoose";
 
@@ -61,20 +62,41 @@ const getProfileById = async (req: Request, res: Response) => {
 };
 
 const createProfile = async (req: Request, res: Response) => {
-  const newProfile = new UserProfile(req.body);
-  const profile = await newProfile.save();
-  res.json(profile);
+  try {
+    const newProfile = new UserProfile(req.body);
+    newProfile.validateSync();
+    const profile = await newProfile.save();
+    res.json(profile);
+  } catch (error) {
+    if (error instanceof mongoose.Error.ValidationError) {
+      res.status(400).json({ error: error.message });
+    } else {
+      res.status(500).json({ error: "Internal Server Error" });
+    }
+  }
 };
 
 const updateProfile = async (req: Request, res: Response) => {
-  const profile = (await UserProfile.findById(req.params.id)) as any;
-  for (const key of Object.keys(req.body)) {
-    profile[key] = req.body[key];
-  }
-  await profile.save();
-  res.json(profile);
+  try {
+    const profile: any = await UserProfile.findById(req.params.id);
+    if (!profile) {
+      return res.status(404).json({ message: "Profile not found" });
+    }
 
-  return profile;
+    for (const key of Object.keys(req.body)) {
+      profile[key] = req.body[key];
+    }
+
+    await profile.validate();
+    await profile.save();
+    res.json(profile);
+  } catch (error) {
+    if (error instanceof mongoose.Error.ValidationError) {
+      res.status(400).json({ error: error.message });
+    } else {
+      res.status(500).json({ error: "Internal Server Error" });
+    }
+  }
 };
 
 const deleteProfile = async (req: Request, res: Response) => {

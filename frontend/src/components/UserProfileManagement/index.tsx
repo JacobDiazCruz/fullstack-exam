@@ -7,7 +7,7 @@ import { UserProfileForm } from "./UserProfileForm";
 import { UserProfileList } from "./UserProfileList";
 
 export const UserProfileManagement: React.FC = () => {
-  const PROFILE_DATA = {
+  const profileData = {
     name: "",
     email: "",
     age: 0,
@@ -16,7 +16,7 @@ export const UserProfileManagement: React.FC = () => {
   const [profiles, setProfiles] = useState<IUserProfile[]>([]);
   const [showProfileForm, setShowProfileForm] = useState(false);
   const [formType, setFormType] = useState<"CREATE" | "UPDATE">("CREATE");
-  const [profile, setProfile] = useState<IUserProfile>(PROFILE_DATA);
+  const [profile, setProfile] = useState<IUserProfile>(profileData);
 
   useEffect(() => {
     fetchProfiles();
@@ -73,14 +73,18 @@ export const UserProfileManagement: React.FC = () => {
         open={showProfileForm}
         onClose={() => {
           setShowProfileForm(false);
-          setProfile(PROFILE_DATA);
+          setProfile(profileData);
         }}
       />
-      <UserProfileList
-        profiles={profiles}
-        fetchProfiles={fetchProfiles}
-        handleClickEdit={handleClickEdit}
-      />
+      {profiles.length ? (
+        <UserProfileList
+          profiles={profiles}
+          fetchProfiles={fetchProfiles}
+          handleClickEdit={handleClickEdit}
+        />
+      ) : (
+        <Typography sx={{ textAlign: "center", mt: 7 }}>No profiles yet.</Typography>
+      )}
     </Box>
   );
 };

@@ -34,6 +34,9 @@ export const UserProfileForm: React.FC<Props> = ({
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
+    if(!profile.name || !profile.email) {
+      // Expected result: This will throw an alert error message
+    }
     e.preventDefault();
     type === "CREATE"
       ? await createProfile(profile)
@@ -126,6 +129,7 @@ export const UserProfileForm: React.FC<Props> = ({
           <Button
             type="submit"
             variant="contained"
+            disabled={!profile.email || !profile.name}
             sx={{
               height: 45,
               background: "black",
