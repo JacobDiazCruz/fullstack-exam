@@ -1,7 +1,7 @@
 ## Exam Notes:
 Issues I've found and some changes that I've made.
 
-1. Initially, after creating a user profile, the updated profile wouldn't appear in the list unless the page is refreshed, resulting in a poor user experience. I fixed this by triggering the **`getAllProfiles`** action after successfully creating a new user profile.
+1. Initially, after creating a user profile, it wouldn't appear in the list unless the page is refreshed, resulting in a poor user experience. I fixed this by triggering the **`getAllProfiles`** action after successfully creating a new user profile.
 
 2. I moved the creation of the user profile to a modal because it should not occupy a lot of space in the UI. This not only improves the UI but also enhances the overall user experience.
 
