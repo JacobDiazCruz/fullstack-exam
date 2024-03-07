@@ -33,6 +33,8 @@ Issues I've found and some changes that I've made.
 
 11. I sorted the `getAllProfiles` query in descending order to have the newest user profile data on top.
 
+12. In the profile form, the submit button will be disabled if either the 'name' or 'email' fields are empty. Additionally, I have aligned these validations with those specified in the Mongoose schema to provide an additional layer of validation on the backend.
+
 ## Tools used:
 
 1. I chose MUI as the UI framework for this project primarily due to its reusable components, which allowed me to complete the project quickly. However, in large-scale applications, I don't commonly recommend MUI or any CSS-in-JS approach, as parsing might cause a slight performance overhead on some components if not done correctly. In such cases, I prefer using TailwindCSS, Bootstrap, or just plain css.
