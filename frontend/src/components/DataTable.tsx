@@ -1,4 +1,4 @@
-import { TextField } from "@mui/material";
+import { Box, TextField } from "@mui/material";
 import { useMemo, useState } from "react";
 import { AutoSizer, Column, Table } from "react-virtualized";
 
@@ -30,26 +30,23 @@ export const DataTable = () => {
   }, [dataItems, searchTerm]);
 
   const total = () => {
-    let runningTotal = 0;
-    const dataItems: any = [];
-
-    runningTotal = dataItems
-      .map((item: any) => item.number)
-      .reduce((a: number, b: number) => a + b, 0);
+    let runningTotal = processedItems
+      .map((item) => item.number)
+      .reduce((a, b) => a + b, 0);
 
     return runningTotal;
   };
 
   return (
-    <>
+    <Box sx={{ pb: 40 }}>
       <TextField
         type="text"
         sx={{ width: "100%", mb: 2, mt: 1 }}
-        placeholder="Filter items..."
+        placeholder="Search for item"
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
       />
-      <AutoSizer>
+      <AutoSizer style={{ marginTop: 5 }}>
         {({ width }) => (
           <Table
             width={width}
@@ -80,9 +77,16 @@ export const DataTable = () => {
               cellRenderer={({ cellData }) => cellData}
               dataKey="number"
             />
+            <Column
+              width={width * 0.3}
+              flexGrow={1}
+              label="Total"
+              cellRenderer={({ cellData }) => total()}
+              dataKey="total"
+            />
           </Table>
         )}
       </AutoSizer>
-    </>
+    </Box>
   );
 };

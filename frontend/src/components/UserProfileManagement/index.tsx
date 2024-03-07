@@ -13,7 +13,6 @@ export const UserProfileManagement: React.FC = () => {
     age: 0,
     tags: [],
   };
-
   const [profiles, setProfiles] = useState<IUserProfile[]>([]);
   const [showProfileForm, setShowProfileForm] = useState(false);
   const [formType, setFormType] = useState<"CREATE" | "UPDATE">("CREATE");
@@ -59,6 +58,7 @@ export const UserProfileManagement: React.FC = () => {
             setFormType("CREATE");
             setShowProfileForm(true);
           }}
+          sx={{ background: "black", textTransform: "capitalize" }}
           startIcon={<AddIcon />}
           variant="contained"
         >

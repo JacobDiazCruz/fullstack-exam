@@ -45,14 +45,17 @@ export const UserProfileList: React.FC<Props> = ({
                   variant="outlined"
                   startIcon={<EditIcon />}
                   onClick={() => handleClickEdit(profile)}
+                  sx={{ textTransform: "capitalize" }}
                 >
                   Edit
                 </Button>
                 <Button
                   startIcon={<DeleteIcon />}
                   variant="outlined"
+                  sx={{ textTransform: "capitalize" }}
                   onClick={async () => {
                     await deleteProfile(profile._id as string);
+
                     fetchProfiles();
                   }}
                 >

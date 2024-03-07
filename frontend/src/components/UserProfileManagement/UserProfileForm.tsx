@@ -17,6 +17,7 @@ const style = {
   position: "absolute" as "absolute",
   top: "50%",
   left: "50%",
+  borderRadius: 4,
   transform: "translate(-50%, -50%)",
   width: 400,
   bgcolor: "background.paper",
@@ -46,8 +47,25 @@ export const UserProfileForm: React.FC<Props> = ({
     onClose();
   };
 
+  const CustomBackdrop = () => {
+    return (
+      <Box
+        sx={{
+          zIndex: (theme) => theme.zIndex.drawer + 1,
+          color: "#fff",
+          opacity: 0.5,
+        }}
+      />
+    );
+  };
+
   return (
-    <Modal open={open} onClose={onClose}>
+    <Modal
+      open={open}
+      onClose={onClose}
+      aria-labelledby="modal-title"
+      aria-describedby="modal-description"
+    >
       <Box sx={style}>
         <Box sx={{ display: "flex", justifyContent: "space-between", mb: 3 }}>
           <Typography variant="h5">Profile Form</Typography>
@@ -71,7 +89,7 @@ export const UserProfileForm: React.FC<Props> = ({
               name="name"
               value={profile.name}
               onChange={handleChange}
-              style={{ width: "100%" }}
+              sx={{ width: "100%", marginTop: 1 }}
             />
           </div>
           <div>
@@ -81,20 +99,32 @@ export const UserProfileForm: React.FC<Props> = ({
               name="email"
               value={profile.email}
               onChange={handleChange}
-              style={{ width: "100%" }}
+              sx={{ width: "100%", marginTop: 1 }}
             />
           </div>
-          <div>
+          <div style={{ display: "flex", flexDirection: "column" }}>
             <label>Age:</label>
             <TextField
               type="number"
               name="age"
+              InputProps={{
+                inputProps: { min: 0 },
+              }}
               value={profile.age}
               onChange={handleChange}
-              style={{ width: "100%" }}
+              sx={{ width: "100px", marginTop: 1 }}
             />
           </div>
-          <Button type="submit" variant="contained">
+          <Button
+            type="submit"
+            variant="contained"
+            sx={{
+              height: 45,
+              background: "black",
+              fontWeight: "600",
+              textTransform: "capitalize",
+            }}
+          >
             Submit
           </Button>
         </form>

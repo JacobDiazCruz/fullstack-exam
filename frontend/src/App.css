@@ -30,6 +30,10 @@
   padding-top: 15px;
 }
 
+.ReactVirtualized__Table__headerTruncatedText {
+  font-weight: bold;
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
