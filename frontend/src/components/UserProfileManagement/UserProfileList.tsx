@@ -10,6 +10,7 @@ import {
   DialogContentText,
   List,
   ListItem,
+  Typography,
 } from "@mui/material";
 import Card from "@mui/material/Card";
 import React, { useState } from "react";
@@ -61,12 +62,30 @@ export const UserProfileList: React.FC<Props> = ({
                 alignItems: "center",
               }}
             >
-              {profile.name} - {profile.email}
-              {/* Display tags if present */}
-              {profile.tags &&
-                profile.tags.map((tag, index) => (
-                  <span key={index}> {tag} </span>
-                ))}
+              <Box>
+                <Typography variant="subtitle1" fontWeight="600">
+                  {profile.name}
+                </Typography>
+                <Typography>{profile.email}</Typography>
+                <Typography>Age: {profile.age}</Typography>
+                <Box sx={{ display: "flex", gap: 2, mt: 1 }}>
+                  {profile.tags &&
+                    profile.tags.map((tag, index) => (
+                      <Box
+                        key={index}
+                        sx={{
+                          borderRadius: 2,
+                          backgroundColor: "#bbf7d0",
+                          color: "#15803d",
+                          p: 1,
+                          fontSize: 12,
+                        }}
+                      >
+                        {tag}
+                      </Box>
+                    ))}
+                </Box>
+              </Box>
               <Box sx={{ display: "flex", gap: 2 }}>
                 <Button
                   variant="outlined"

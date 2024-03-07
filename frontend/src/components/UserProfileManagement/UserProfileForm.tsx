@@ -1,5 +1,6 @@
 import CloseIcon from "@mui/icons-material/Close";
 import {
+  Autocomplete,
   Box,
   Button,
   Dialog,
@@ -42,16 +43,20 @@ export const UserProfileForm: React.FC<Props> = ({
     onClose();
   };
 
-  const CustomBackdrop = () => {
-    return (
-      <Box
-        sx={{
-          zIndex: (theme) => theme.zIndex.drawer + 1,
-          color: "#fff",
-          opacity: 0.5,
-        }}
-      />
-    );
+  const TAGS = [
+    "Software Engineer",
+    "Frontend Developer",
+    "Backend Developer",
+    "Cybersecurity Analyst",
+  ];
+
+  const selectedValues = React.useMemo(
+    () => TAGS.filter((v) => profile.tags?.includes(v)),
+    [TAGS, profile.tags]
+  );
+
+  const handleTagsChange = (_: any, values: string[]) => {
+    setProfile({ ...profile, tags: values });
   };
 
   return (
@@ -92,6 +97,17 @@ export const UserProfileForm: React.FC<Props> = ({
               value={profile.email}
               onChange={handleChange}
               sx={{ width: "100%", marginTop: 1 }}
+            />
+          </div>
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            <label>Tags:</label>
+            <Autocomplete
+              options={TAGS}
+              multiple
+              sx={{ width: "100%", mt: 1 }}
+              value={selectedValues}
+              onChange={handleTagsChange}
+              renderInput={(params) => <TextField {...params} />}
             />
           </div>
           <div style={{ display: "flex", flexDirection: "column" }}>

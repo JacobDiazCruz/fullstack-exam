@@ -20,6 +20,6 @@
 
 ## Tools used:
 
-1. I chose MUI as the UI framework for this project primarily due to its reusable components, which allowed me to complete the project quickly. However, in large-scale applications, I don't commonly recommend MUI or any CSS-in-JS approach, as parsing might cause a slight performance overhead on some components if not done correctly. In such cases, I prefer using TailwindCSS, Bootstrap, or plain CSS.
+1. I chose MUI as the UI framework for this project primarily due to its reusable components, which allowed me to complete the project quickly. However, in large-scale applications, I don't commonly recommend MUI or any CSS-in-JS approach, as parsing might cause a slight performance overhead on some components if not done correctly. In such cases, I prefer using TailwindCSS, Bootstrap, or just plain css.
 
 2. I applied a large dataset renderer from **`react-virtualizer`** to fix the performance issue present in the DataTable component. In some cases, I might create my own virtualizer based on specific needs, especially if the items are too dynamic to display. However, in this case, the library helped to resolve the problem quickly.
