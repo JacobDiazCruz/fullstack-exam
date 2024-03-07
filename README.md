@@ -31,6 +31,8 @@ Issues I've found and some changes that I've made.
 
 10. There was an issue with the **`total`** function in the DataTable; I fixed it to accurately calculate the total when the items update.
 
+11. I sorted the `getAllProfiles` query in descending order to have the newest user profile data on top.
+
 ## Tools used:
 
 1. I chose MUI as the UI framework for this project primarily due to its reusable components, which allowed me to complete the project quickly. However, in large-scale applications, I don't commonly recommend MUI or any CSS-in-JS approach, as parsing might cause a slight performance overhead on some components if not done correctly. In such cases, I prefer using TailwindCSS, Bootstrap, or just plain css.
