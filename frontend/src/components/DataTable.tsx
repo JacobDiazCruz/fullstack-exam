@@ -1,4 +1,4 @@
-import { Box, TextField } from "@mui/material";
+import { Box, TextField, Typography } from "@mui/material";
 import { useMemo, useState } from "react";
 import { AutoSizer, Column, Table } from "react-virtualized";
 
@@ -39,9 +39,12 @@ export const DataTable = () => {
 
   return (
     <Box sx={{ pb: 40 }}>
+      <Typography variant="h5" fontWeight="600">
+        Data Table
+      </Typography>
       <TextField
         type="text"
-        sx={{ width: "100%", mb: 2, mt: 1 }}
+        sx={{ width: "100%", mb: 2, mt: 3 }}
         placeholder="Search for item"
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}

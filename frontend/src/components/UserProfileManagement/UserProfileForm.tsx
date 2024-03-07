@@ -61,7 +61,7 @@ export const UserProfileForm: React.FC<Props> = ({
 
   return (
     <Dialog open={open} onClose={onClose}>
-      <DialogContent sx={{ width: 400 }}>
+      <DialogContent sx={{ width: 500 }}>
         <Box sx={{ display: "flex", justifyContent: "space-between", mb: 3 }}>
           <Typography variant="h6" fontWeight="600">
             {type === "CREATE" ? "Create Profile" : "Edit Profile"}
