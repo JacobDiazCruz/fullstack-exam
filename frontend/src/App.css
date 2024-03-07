@@ -17,6 +17,19 @@
   }
 }
 
+.ReactVirtualized__Table__headerRow {
+  display: flex;
+}
+
+.ReactVirtualized__Table__row {
+  display: flex;
+  border-bottom: 1px solid #d6d6d6;
+}
+
+.ReactVirtualized__Table__rowColumn {
+  padding-top: 15px;
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;

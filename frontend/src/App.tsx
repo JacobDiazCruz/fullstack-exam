@@ -1,68 +1,22 @@
-import AddIcon from "@mui/icons-material/Add";
-import { Button } from "@mui/material";
-import React, { useEffect, useState } from "react";
-import { IUserProfile } from "../../backend";
-import { getAllProfiles } from "./api/profile";
+import { Box, Divider } from "@mui/material";
+import React from "react";
 import { DataTable } from "./components/DataTable";
-import { UserProfileForm } from "./components/UserProfileForm";
-import { UserProfileList } from "./components/UserProfileList";
+import { UserProfileManagement } from "./components/UserProfileManagement";
 
 const App: React.FC = () => {
-  const [profiles, setProfiles] = useState<IUserProfile[]>([]);
-  const [showProfileForm, setShowProfileForm] = useState(false);
-  const [formType, setFormType] = useState<"CREATE" | "UPDATE">("CREATE");
-  const [profile, setProfile] = useState<IUserProfile>({
-    name: "",
-    email: "",
-    age: 0,
-    tags: [],
-  });
-
-  useEffect(() => {
-    fetchProfiles();
-  }, []);
-
-  const fetchProfiles = async () => {
-    const fetchedProfiles = await getAllProfiles();
-    setProfiles(fetchedProfiles);
-  };
-
   return (
-    <div>
-      <div
-        style={{ margin: "auto", justifyContent: "center", width: "1200px" }}
-      >
-        <h1>User Profile Management</h1>
-        <Button
-          onClick={() => {
-            setFormType("CREATE");
-            setShowProfileForm(true);
-          }}
-          startIcon={<AddIcon />}
-          variant="contained"
-        >
-          Add new Profile
-        </Button>
-        <UserProfileForm
-          type={formType}
-          profile={profile}
-          setProfile={setProfile}
-          fetchProfiles={fetchProfiles}
-          open={showProfileForm}
-          onClose={() => setShowProfileForm(false)}
-        />
-        <UserProfileList
-          profiles={profiles}
-          fetchProfiles={fetchProfiles}
-          handleShowForm={(profile: IUserProfile) => {
-            setFormType("UPDATE");
-            setProfile(profile);
-            setShowProfileForm(true);
-          }}
-        />
-        <DataTable />
-      </div>
-    </div>
+    <Box
+      sx={{
+        m: "auto",
+        justifyContent: "center",
+        width: "1200px",
+        py: "60px",
+      }}
+    >
+      <UserProfileManagement />
+      <Divider sx={{ my: 5 }} />
+      <DataTable />
+    </Box>
   );
 };
 

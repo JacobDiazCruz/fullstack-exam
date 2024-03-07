@@ -2,8 +2,8 @@ import { Modal } from "@mui/base";
 import CloseIcon from "@mui/icons-material/Close";
 import { Box, Button, IconButton, TextField, Typography } from "@mui/material";
 import React from "react";
-import { IUserProfile } from "../../../backend";
-import { createProfile, updateProfile } from "../api/profile";
+import { IUserProfile } from "../../../../backend";
+import { createProfile, updateProfile } from "../../api/profile";
 interface Props {
   type: "CREATE" | "UPDATE";
   fetchProfiles: () => void;

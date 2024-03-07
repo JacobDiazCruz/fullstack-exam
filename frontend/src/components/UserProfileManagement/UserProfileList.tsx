@@ -3,23 +3,22 @@ import EditIcon from "@mui/icons-material/Edit";
 import { Box, Button, List, ListItem } from "@mui/material";
 import Card from "@mui/material/Card";
 import React from "react";
-import { IUserProfile } from "../../../backend";
-import { deleteProfile } from "../api/profile";
+import { IUserProfile } from "../../../../backend";
+import { deleteProfile } from "../../api/profile";
 
 interface Props {
   profiles: IUserProfile[];
   fetchProfiles: () => void;
-  handleShowForm: (profile: IUserProfile) => void;
+  handleClickEdit: (profile: IUserProfile) => void;
 }
 
 export const UserProfileList: React.FC<Props> = ({
   profiles,
   fetchProfiles,
-  handleShowForm,
+  handleClickEdit,
 }) => {
   return (
     <div>
-      <h2>Task 1: User Profiles</h2>
       <List>
         {profiles.map((profile: IUserProfile) => (
           <ListItem disablePadding>
@@ -45,7 +44,7 @@ export const UserProfileList: React.FC<Props> = ({
                 <Button
                   variant="outlined"
                   startIcon={<EditIcon />}
-                  onClick={() => handleShowForm(profile)}
+                  onClick={() => handleClickEdit(profile)}
                 >
                   Edit
                 </Button>
@@ -64,8 +63,6 @@ export const UserProfileList: React.FC<Props> = ({
           </ListItem>
         ))}
       </List>
-      <hr />
-      <h2>Task 2: Data table</h2>
     </div>
   );
 };

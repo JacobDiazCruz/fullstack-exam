@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import { TextField } from "@mui/material";
+import { useMemo, useState } from "react";
+import { AutoSizer, Column, Table } from "react-virtualized";
 
 interface DataItem {
   id: number;
@@ -15,21 +17,17 @@ const generateDataItems = (count: number): DataItem[] => {
   }));
 };
 
-export const DataTable: React.FC = () => {
-  const [dataItems, setDataItems] = useState<DataItem[]>(
-    generateDataItems(1000)
-  );
+export const DataTable = () => {
+  const dataItems = generateDataItems(1000);
   const [searchTerm, setSearchTerm] = useState("");
 
-  const processedItems = (() => {
-    return dataItems.reduce<DataItem[]>((acc, item) => {
-      if (item.value.toLowerCase().includes(searchTerm.toLowerCase())) {
-        const newItem = { ...item, number: item.number * 2 };
-        return [...acc, newItem];
-      }
-      return acc;
-    }, []);
-  })();
+  const processedItems = useMemo(() => {
+    return dataItems
+      .filter((item) =>
+        item.value.toLowerCase().includes(searchTerm.toLowerCase())
+      )
+      .map((item) => ({ ...item, number: item.number * 2 }));
+  }, [dataItems, searchTerm]);
 
   const total = () => {
     let runningTotal = 0;
@@ -43,35 +41,48 @@ export const DataTable: React.FC = () => {
   };
 
   return (
-    <div>
-      <input
+    <>
+      <TextField
         type="text"
+        sx={{ width: "100%", mb: 2, mt: 1 }}
         placeholder="Filter items..."
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
       />
-      <table>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Value</th>
-            <th>Number</th>
-          </tr>
-        </thead>
-        <tbody>
-          {processedItems.map((item) => (
-            <tr key={Math.random()}>
-              <td>{item.id}</td>
-              <td>{item.value}</td>
-              <td>{item.number}</td>
-            </tr>
-          ))}
-          <tr>
-            <td colSpan={2}>Total()</td>
-            <td>{total()}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+      <AutoSizer>
+        {({ width }) => (
+          <Table
+            width={width}
+            height={300}
+            headerHeight={20}
+            rowHeight={60}
+            rowCount={processedItems.length}
+            rowGetter={({ index }) => processedItems[index]}
+          >
+            <Column
+              width={width * 0.3}
+              label="ID"
+              flexGrow={5}
+              cellRenderer={({ cellData }) => cellData}
+              dataKey="id"
+            />
+            <Column
+              width={width * 0.3}
+              flexGrow={1}
+              label="Value"
+              cellRenderer={({ cellData }) => cellData}
+              dataKey="value"
+            />
+            <Column
+              width={width * 0.3}
+              flexGrow={1}
+              label="Number"
+              cellRenderer={({ cellData }) => cellData}
+              dataKey="number"
+            />
+          </Table>
+        )}
+      </AutoSizer>
+    </>
   );
 };
