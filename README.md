@@ -1,3 +1,13 @@
+## Instructions:
+
+1. To run the backend, navigate to /backend and type `npm start`. 
+- The app will run on port 3000
+
+2. To run the frontend, navigate to /frontend and type `npm start`.
+- The app will run on port 3001
+
+3. I used my own live cluster that contains updated data. If you prefer to use your own local mongodb connection, please feel free to change it.
+
 ## Exam Notes:
 Issues I've found and some changes that I've made.
 
