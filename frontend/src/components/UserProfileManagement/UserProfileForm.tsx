@@ -1,6 +1,13 @@
-import { Modal } from "@mui/base";
 import CloseIcon from "@mui/icons-material/Close";
-import { Box, Button, IconButton, TextField, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Dialog,
+  DialogContent,
+  IconButton,
+  TextField,
+  Typography,
+} from "@mui/material";
 import React from "react";
 import { IUserProfile } from "../../../../backend";
 import { createProfile, updateProfile } from "../../api/profile";
@@ -12,18 +19,6 @@ interface Props {
   setProfile: any;
   onClose: () => void;
 }
-
-const style = {
-  position: "absolute" as "absolute",
-  top: "50%",
-  left: "50%",
-  borderRadius: 4,
-  transform: "translate(-50%, -50%)",
-  width: 400,
-  bgcolor: "background.paper",
-  boxShadow: 24,
-  p: 4,
-};
 
 export const UserProfileForm: React.FC<Props> = ({
   type,
@@ -60,13 +55,8 @@ export const UserProfileForm: React.FC<Props> = ({
   };
 
   return (
-    <Modal
-      open={open}
-      onClose={onClose}
-      aria-labelledby="modal-title"
-      aria-describedby="modal-description"
-    >
-      <Box sx={style}>
+    <Dialog open={open} onClose={onClose}>
+      <DialogContent sx={{ width: 400 }}>
         <Box sx={{ display: "flex", justifyContent: "space-between", mb: 3 }}>
           <Typography variant="h5">Profile Form</Typography>
           <IconButton onClick={onClose}>
@@ -128,7 +118,7 @@ export const UserProfileForm: React.FC<Props> = ({
             Submit
           </Button>
         </form>
-      </Box>
-    </Modal>
+      </DialogContent>
+    </Dialog>
   );
 };
