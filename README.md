@@ -8,15 +8,17 @@
 
 4. I applied a delete functionality for each user profile, along with a dialog component to help prevent accidental deletion of the user's profile when the button is clicked. This enhances the user experience of this feature.
 
-5. There's an issue with the initial setup that might cause some performance bottlenecks in the future if not fixed. The problem is that all the components are rendered in the App component. So when DataTable updates, it affects User Management as well. The solution I applied is to separate the components based on their features into different files to avoid re-renders whenever one of their states updates.
+5. I added functionality for creating, displaying, and editing tags.
 
-6. In the backend, I found an issue in **`getProfileById`**. I resolved it by changing the conditional statement to simply apply the **`find`** method.
+6. There's an issue with the initial setup that might cause some performance bottlenecks in the future if not fixed. The problem is that all the components are rendered in the App component. So when DataTable updates, it affects User Management as well. The solution I applied is to separate the components based on their features into different files to avoid re-renders whenever one of their states updates.
 
-7. Initially, the search filter had poor performance because it scanned all the data in the table one by one. Since the table has 1000 items, displaying all of them at once in the UI is not advisable. My solution was to apply virtualization to the table to efficiently render the large dataset in the UI. This optimization improves performance and memory usage.
+7. In the backend, I found an issue in **`getProfileById`**. I resolved it by changing the conditional statement to simply apply the **`find`** method.
 
-8. I changed the **`dataItems`** state from state to constant since it doesnt need a state update.
+8. Initially, the search filter had poor performance because it scanned all the data in the table one by one. Since the table has 1000 items, displaying all of them at once in the UI is not advisable. My solution was to apply virtualization to the table to efficiently render the large dataset in the UI. This optimization improves performance and memory usage.
 
-9. There was an issue with the **`total`** function in the DataTable; I fixed it to accurately calculate the total when the items update.
+9. I changed the **`dataItems`** state from state to constant since it doesnt need a state update.
+
+10. There was an issue with the **`total`** function in the DataTable; I fixed it to accurately calculate the total when the items update.
 
 ## Tools used:
 
