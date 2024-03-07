@@ -48,7 +48,7 @@ const connectDB = async () => {
 };
 
 const getAllProfiles = async (req: Request, res: Response) => {
-  const profiles = await UserProfile.find();
+  const profiles = await UserProfile.find().sort({ _id: -1 });
   res.json(profiles);
   return profiles;
 };
@@ -80,7 +80,6 @@ const updateProfile = async (req: Request, res: Response) => {
 const deleteProfile = async (req: Request, res: Response) => {
   const profile: any = await getProfileById(req, res);
   await profile.deleteOne();
-  // res.json({ msg: "Profile removed" });
   return profile;
 };
 
