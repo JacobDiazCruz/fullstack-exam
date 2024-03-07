@@ -9,7 +9,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import React from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import { IUserProfile } from "../../../../backend";
 import { createProfile, updateProfile } from "../../api/profile";
 interface Props {
@@ -17,7 +17,7 @@ interface Props {
   fetchProfiles: () => void;
   open: boolean;
   profile: IUserProfile;
-  setProfile: any;
+  setProfile: Dispatch<SetStateAction<IUserProfile>>;
   onClose: () => void;
 }
 
