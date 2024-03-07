@@ -25,3 +25,7 @@
 1. I chose MUI as the UI framework for this project primarily due to its reusable components, which allowed me to complete the project quickly. However, in large-scale applications, I don't commonly recommend MUI or any CSS-in-JS approach, as parsing might cause a slight performance overhead on some components if not done correctly. In such cases, I prefer using TailwindCSS, Bootstrap, or just plain css.
 
 2. I applied a large dataset renderer from **`react-virtualizer`** to fix the performance issue present in the DataTable component. In some cases, I might create my own virtualizer based on specific needs, especially if the items are too dynamic to display. However, in this case, the library helped to resolve the problem quickly.
+
+## Additional notes:
+
+1. In the backend, I retained the app's initial structure without making changes, since it's unnecessary to update and abstract different parts into separate directories. However, for larger applications, I would consider organizing it by creating separate directories for `services`, `models`, `controllers`, and `router`. This approach can enhance the overall structure of the app. I can also add additional layers of validations to ensure sure that the entry points for each of these features have solid security.
