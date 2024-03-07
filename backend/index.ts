@@ -1,6 +1,5 @@
 import bodyParser from "body-parser";
 import cors from "cors";
-import { AnyARecord } from "dns";
 import express, { Request, Response } from "express";
 import mongoose, { Schema } from "mongoose";
 
